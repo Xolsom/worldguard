@@ -163,9 +163,15 @@ public class WorldGuardEntityListener extends EntityListener {
             if (attacker != null && attacker instanceof Player) {
                 if (wcfg.useRegions) {
                     Vector pt = toVector(defender.getLocation());
+                    Vector dt = toVector(attacker.getLocation());
                     RegionManager mgr = plugin.getGlobalRegionManager().get(player.getWorld());
 
                     if (!mgr.getApplicableRegions(pt).allows(DefaultFlag.PVP)) {
+                        ((Player) attacker).sendMessage(ChatColor.DARK_RED + "Your target is in a no-PvP area.");
+                        event.setCancelled(true);
+                        return;
+                    }
+                    if (!mgr.getApplicableRegions(dt).allows(DefaultFlag.PVP)) {
                         ((Player) attacker).sendMessage(ChatColor.DARK_RED + "You are in a no-PvP area.");
                         event.setCancelled(true);
                         return;
@@ -220,9 +226,15 @@ public class WorldGuardEntityListener extends EntityListener {
             if (attacker != null && attacker instanceof Player) {
                 if (wcfg.useRegions) {
                     Vector pt = toVector(defender.getLocation());
+                    Vector dt = toVector(attacker.getLocation());
                     RegionManager mgr = plugin.getGlobalRegionManager().get(player.getWorld());
 
                     if (!mgr.getApplicableRegions(pt).allows(DefaultFlag.PVP)) {
+                        ((Player) attacker).sendMessage(ChatColor.DARK_RED + "Your target is in a no-PvP area.");
+                        event.setCancelled(true);
+                        return;
+                    }
+                    if (!mgr.getApplicableRegions(dt).allows(DefaultFlag.PVP)) {
                         ((Player) attacker).sendMessage(ChatColor.DARK_RED + "You are in a no-PvP area.");
                         event.setCancelled(true);
                         return;
